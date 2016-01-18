@@ -1,5 +1,9 @@
 require "rukov/version"
 
 module Rukov
-  # Your code goes here...
+  class << self
+    def talk(text)
+      text
+    end
+  end
 end

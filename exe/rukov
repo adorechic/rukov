@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'rukov'
+puts Rukov.talk(ARGV[0])
