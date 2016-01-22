@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 require 'rukov'
-puts Rukov.talk(ARGV[0])
+
+case ARGV[0]
+when 'learn'
+  puts Rukov.learn(ARGV[1])
+else
+  raise ArgumentError, 'Unknown command. [learn]'
+end

@@ -3,7 +3,7 @@ require "natto"
 
 module Rukov
   class << self
-    def talk(text)
+    def learn(text)
       nm = Natto::MeCab.new(rcfile: rcfile)
       nodes = []
       nm.parse(text) do |n|
