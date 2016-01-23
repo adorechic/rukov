@@ -1,8 +1,13 @@
 require "rukov/version"
 require "natto"
+require 'pathname'
 
 module Rukov
   class << self
+    def study(path)
+      learn(Pathname.new(path).read)
+    end
+
     def learn(text)
       nm = Natto::MeCab.new(rcfile: rcfile)
       nodes = []
