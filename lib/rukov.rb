@@ -17,12 +17,21 @@ module Rukov
 
       hash = {}
       nodes.each.with_index do |prefix1, index|
+        next if prefix1.surface == "。"
         prefix2, suffix = nodes[index + 1], nodes[index + 2]
 
         if prefix2 && suffix
+          next if prefix2.surface == "。"
+
           hash[prefix1.surface] ||= {}
           hash[prefix1.surface][prefix2.surface] ||= []
-          hash[prefix1.surface][prefix2.surface] << suffix.surface
+
+          if suffix.surface == "。"
+            hash[prefix1.surface][prefix2.surface] << ""
+          else
+            hash[prefix1.surface][prefix2.surface] << suffix.surface
+          end
+
           hash[prefix1.surface][prefix2.surface].uniq!
         end
       end
