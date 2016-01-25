@@ -16,8 +16,13 @@ module Rukov
       end
 
       hash = {}
+      started = true
+      start_words = []
       nodes.each.with_index do |prefix1, index|
-        next if prefix1.surface == "。"
+        if prefix1.surface == "。"
+          started = true
+          next
+        end
         prefix2, suffix = nodes[index + 1], nodes[index + 2]
 
         if prefix2 && suffix
@@ -32,9 +37,17 @@ module Rukov
             hash[prefix1.surface][prefix2.surface] << suffix.surface
           end
 
+          if started
+            started = false
+            start_words << prefix1.surface
+            start_words.uniq!
+          end
+
           hash[prefix1.surface][prefix2.surface].uniq!
         end
       end
+
+      p start_words
 
       hash
     end
