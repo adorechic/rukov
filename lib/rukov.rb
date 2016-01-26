@@ -1,6 +1,7 @@
 require "rukov/version"
 require "natto"
 require 'pathname'
+require 'rukov/brain'
 
 module Rukov
   class << self
@@ -15,9 +16,9 @@ module Rukov
         nodes << n
       end
 
-      hash = {}
+      brain = Brain.new
+
       started = true
-      start_words = []
       nodes.each.with_index do |prefix1, index|
         if prefix1.surface == "。"
           started = true
@@ -28,28 +29,28 @@ module Rukov
         if prefix2 && suffix
           next if prefix2.surface == "。"
 
-          hash[prefix1.surface] ||= {}
-          hash[prefix1.surface][prefix2.surface] ||= []
+          brain.dictionary[prefix1.surface] ||= {}
+          brain.dictionary[prefix1.surface][prefix2.surface] ||= []
 
           if suffix.surface == "。"
-            hash[prefix1.surface][prefix2.surface] << ""
+            brain.dictionary[prefix1.surface][prefix2.surface] << ""
           else
-            hash[prefix1.surface][prefix2.surface] << suffix.surface
+            brain.dictionary[prefix1.surface][prefix2.surface] << suffix.surface
           end
 
           if started
             started = false
-            start_words << prefix1.surface
-            start_words.uniq!
+            brain.start_words << prefix1.surface
+            brain.start_words.uniq!
           end
 
-          hash[prefix1.surface][prefix2.surface].uniq!
+          brain.dictionary[prefix1.surface][prefix2.surface].uniq!
         end
       end
 
-      p start_words
+      p brain.start_words
 
-      hash
+      brain.dictionary
     end
 
     def rcfile
