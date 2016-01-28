@@ -49,6 +49,7 @@ module Rukov
       end
 
       p brain.start_words
+      brain.save
 
       brain.dictionary
     end

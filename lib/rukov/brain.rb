@@ -6,5 +6,11 @@ module Rukov
       @dictionary = {}
       @start_words = []
     end
+
+    def save
+      Pathname.new("tmp/brain").open("w") do |f|
+        f.puts(Marshal.dump(self))
+      end
+    end
   end
 end
