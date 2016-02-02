@@ -12,5 +12,9 @@ module Rukov
         f.puts(Marshal.dump(self))
       end
     end
+
+    def self.load
+      Marshal.load(Pathname.new("tmp/brain").read)
+    end
   end
 end

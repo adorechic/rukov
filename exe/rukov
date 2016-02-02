@@ -6,6 +6,8 @@ when 'study'
   puts Rukov.study(ARGV[1])
 when 'learn'
   puts Rukov.learn(ARGV[1])
+when 'load'
+  puts Rukov.load
 else
   raise ArgumentError, 'Unknown command. [learn]'
 end
