@@ -60,6 +60,35 @@ module Rukov
       brain.dictionary
     end
 
+    def speak
+      brain = Brain.load
+
+      message = ""
+
+      prefix1 = brain.start_words.sample
+      message << prefix1
+      prefix2 = brain.dictionary[prefix1].keys.sample
+
+      if prefix2
+        message << prefix2
+
+        loop do
+          dict1 = brain.dictionary[prefix1]
+          break unless dict1
+
+          suffix = Array(dict1[prefix2]).sample
+
+          break unless suffix
+          message << suffix
+
+          prefix1 = prefix2
+          prefix2 = suffix
+        end
+      end
+
+      message
+    end
+
     def rcfile
       ENV['MECABRC'] || '/usr/local/etc/mecabrc'
     end

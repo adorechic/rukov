@@ -8,6 +8,8 @@ when 'learn'
   puts Rukov.learn(ARGV[1])
 when 'load'
   puts Rukov.load
+when 'speak'
+  puts Rukov.speak
 else
   raise ArgumentError, 'Unknown command. [learn]'
 end
