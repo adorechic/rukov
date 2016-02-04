@@ -13,6 +13,11 @@ module Rukov
       end
     end
 
+    def clear
+      initialize
+      save
+    end
+
     def self.load
       Marshal.load(Pathname.new("tmp/brain").read)
     end

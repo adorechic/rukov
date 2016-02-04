@@ -10,6 +10,8 @@ when 'load'
   puts Rukov.load
 when 'speak'
   puts Rukov.speak
+when 'clear'
+  puts Rukov.clear
 else
   raise ArgumentError, 'Unknown command. [learn]'
 end
