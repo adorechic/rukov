@@ -2,11 +2,16 @@ require "rukov/version"
 require "natto"
 require 'pathname'
 require 'rukov/brain'
+require 'open-uri'
 
 module Rukov
   class << self
     def study(path)
-      learn(Pathname.new(path).read)
+      if path.start_with?('http')
+        body = open(path).read
+      else
+        learn(Pathname.new(path).read)
+      end
     end
 
     def learn(text)
