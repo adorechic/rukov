@@ -8,7 +8,12 @@ module Rukov
   class << self
     def study(path)
       if path.start_with?('http')
-        body = open(path).read
+        body = open(path).read.
+               gsub(%r{<head.+?</head>}m, '').
+               gsub(%r{<!--.+?-->}m, '').
+               gsub(%r{<script[^<]+</script>}, '').
+               gsub(/<[^>]+>/, '').
+               gsub(/\r?\n/, '')
       else
         learn(Pathname.new(path).read)
       end
