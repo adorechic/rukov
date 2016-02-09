@@ -14,6 +14,7 @@ module Rukov
                gsub(%r{<script[^<]+</script>}, '').
                gsub(/<[^>]+>/, '').
                gsub(/\r?\n/, '')
+        learn(body)
       else
         learn(Pathname.new(path).read)
       end
