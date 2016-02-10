@@ -65,12 +65,6 @@ module Rukov
       brain.dictionary
     end
 
-    def load
-      brain = Brain.load
-      p brain.start_words
-      brain.dictionary
-    end
-
     def clear
       brain = Brain.load
       brain.clear

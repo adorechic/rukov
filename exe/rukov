@@ -6,8 +6,6 @@ when 'study'
   puts Rukov.study(ARGV[1])
 when 'learn'
   puts Rukov.learn(ARGV[1])
-when 'load'
-  puts Rukov.load
 when 'speak'
   puts Rukov.speak
 when 'clear'
