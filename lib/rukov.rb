@@ -1,6 +1,6 @@
 require "rukov/version"
-require "natto"
 require 'pathname'
+require 'rukov/word_set'
 require 'rukov/brain'
 require 'open-uri'
 
@@ -21,32 +21,13 @@ module Rukov
     end
 
     def learn(text)
-      nm = Natto::MeCab.new(rcfile: rcfile)
-      nodes = []
-      nm.parse(text) do |n|
-        nodes << n
-      end
-
       brain = Brain.new
 
-      started = true
-      nodes.each.with_index do |prefix1, index|
-        if prefix1.surface == "。"
-          started = true
-          next
-        end
-        prefix2, suffix = nodes[index + 1], nodes[index + 2]
-
-        if prefix2 && suffix
-          next if prefix2.surface == "。"
-
-          brain.memory(prefix1.surface, prefix2.surface, suffix.surface)
-
-          if started
-            started = false
-            brain.start_words << prefix1.surface
-            brain.start_words.uniq!
-          end
+      WordSet.new(text).each_set do |prefix1, prefix2, suffix, start_word|
+        brain.memory(prefix1.surface, prefix2.surface, suffix.surface)
+        if start_word
+          brain.start_words << prefix1.surface
+          brain.start_words.uniq!
         end
       end
 
@@ -86,8 +67,5 @@ module Rukov
       message
     end
 
-    def rcfile
-      ENV['MECABRC'] || '/usr/local/etc/mecabrc'
-    end
   end
 end
