@@ -63,8 +63,7 @@ module Rukov
     end
 
     def clear
-      brain = Brain.load
-      brain.clear
+      Brain.load.clear
     end
 
     def speak
