@@ -10,9 +10,7 @@ module Rukov
     end
 
     def memory(prefix1, prefix2, suffix)
-      dictionary[prefix1] ||= {}
-      dictionary[prefix1][prefix2] ||= []
-      dictionary[prefix1][prefix2] << end_char?(suffix) ? "" : suffix
+      suffixes(prefix1, prefix2) << end_char?(suffix) ? "" : suffix
     end
 
     def save
@@ -34,6 +32,11 @@ module Rukov
 
     def end_char?(char)
       END_CHARS.include?(char)
+    end
+
+    def suffixes(prefix1, prefix2)
+      dictionary[prefix1] ||= {}
+      dictionary[prefix1][prefix2] ||= []
     end
   end
 end
