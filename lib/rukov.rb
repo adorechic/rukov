@@ -40,14 +40,7 @@ module Rukov
         if prefix2 && suffix
           next if prefix2.surface == "。"
 
-          brain.dictionary[prefix1.surface] ||= {}
-          brain.dictionary[prefix1.surface][prefix2.surface] ||= []
-
-          if suffix.surface == "。"
-            brain.dictionary[prefix1.surface][prefix2.surface] << ""
-          else
-            brain.dictionary[prefix1.surface][prefix2.surface] << suffix.surface
-          end
+          brain.memory(prefix1.surface, prefix2.surface, suffix.surface)
 
           if started
             started = false

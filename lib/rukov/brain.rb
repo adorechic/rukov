@@ -2,9 +2,17 @@ module Rukov
   class Brain
     attr_accessor :start_words, :dictionary
 
+    END_CHARS = %w(。)
+
     def initialize
       @dictionary = {}
       @start_words = []
+    end
+
+    def memory(prefix1, prefix2, suffix)
+      dictionary[prefix1] ||= {}
+      dictionary[prefix1][prefix2] ||= []
+      dictionary[prefix1][prefix2] << end_char?(suffix) ? "" : suffix
     end
 
     def save
@@ -20,6 +28,12 @@ module Rukov
 
     def self.load
       Marshal.load(Pathname.new("tmp/brain").read)
+    end
+
+    private
+
+    def end_char?(char)
+      END_CHARS.include?(char)
     end
   end
 end
