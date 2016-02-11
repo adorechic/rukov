@@ -22,7 +22,7 @@ module Rukov
         if prefix2 && suffix
           next if prefix2.surface == "。"
 
-          yield prefix1.surface, prefix2.surface, suffix.surface, started
+          yield prefix1, prefix2, suffix, started
 
           started = false
         end
