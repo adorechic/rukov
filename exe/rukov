@@ -3,13 +3,13 @@ require 'rukov'
 
 case ARGV[0]
 when 'study'
-  puts Rukov.study(ARGV[1])
+  Rukov.study(ARGV[1])
 when 'learn'
-  puts Rukov.learn(ARGV[1])
+  Rukov.learn(ARGV[1])
 when 'speak'
   puts Rukov.speak
 when 'clear'
-  puts Rukov.clear
+  Rukov.clear
 else
   raise ArgumentError, 'Unknown command. [learn]'
 end

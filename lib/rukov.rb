@@ -59,17 +59,12 @@ module Rukov
         end
       end
 
-      p brain.start_words
       brain.save
-
-      brain.dictionary
     end
 
     def clear
       brain = Brain.load
       brain.clear
-      p brain.start_words
-      brain.dictionary
     end
 
     def speak
