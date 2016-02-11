@@ -11,6 +11,7 @@ module Rukov
 
     def memory(prefix1, prefix2, suffix)
       suffixes(prefix1, prefix2) << end_char?(suffix) ? "" : suffix
+      suffixes(prefix1, prefix2).uniq!
     end
 
     def save

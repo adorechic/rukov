@@ -47,8 +47,6 @@ module Rukov
             brain.start_words << prefix1.surface
             brain.start_words.uniq!
           end
-
-          brain.dictionary[prefix1.surface][prefix2.surface].uniq!
         end
       end
 
